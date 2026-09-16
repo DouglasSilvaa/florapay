@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#202b4d">
+  <meta name="description" content="Demonstração interativa de uma central de pagamentos com Pix, boleto, cartões e doações.">
+  <title>FloraPay — Central de pagamentos | Demonstração</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" class="svg-library" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h16m-7-7 7 7-7 7"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="m12 2 2.1 7.9L22 12l-7.9 2.1L12 22l-2.1-7.9L2 12l7.9-2.1L12 2Z"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20m-15 5h4"/></symbol>
+    <symbol id="i-bill" viewBox="0 0 24 24"><path d="M5 3h14v18l-3-2-4 2-4-2-3 2V3Z"/><path d="M9 8h6M9 12h6"/></symbol>
+    <symbol id="i-pix" viewBox="0 0 24 24"><path d="m12 2 7.5 7.5a3.5 3.5 0 0 1 0 5L12 22l-7.5-7.5a3.5 3.5 0 0 1 0-5L12 2Z"/><path d="m7.5 12 2.2 2.2a3.25 3.25 0 0 0 4.6 0l2.2-2.2M7.5 12l2.2-2.2a3.25 3.25 0 0 1 4.6 0l2.2 2.2"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="m13 2-9 12h7l-1 8 10-12h-7l0-8Z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 11v6m0-10h.01"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  </svg>
+
+  <div class="demo-ribbon" role="status"><span class="ribbon-dot"></span> PROTÓTIPO INTERATIVO <span class="ribbon-separator">•</span> Nenhum pagamento real será realizado</div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#inicio" aria-label="FloraPay, voltar ao início">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 4 27 15 16 26 5 15 16 4Z" fill="currentColor" opacity=".95"/><path d="m16 10 5 5-5 5-5-5 5-5Z" fill="#202b4d"/></svg></span>
+        <span>flora<span class="brand-accent">pay</span><span class="brand-period">.</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="#beneficios">Benefícios</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#perguntas">Dúvidas</a>
+      </nav>
+      <a class="header-action" href="#checkout">Explorar demonstração <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="hero container" aria-labelledby="hero-heading">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="eyebrow-star"><svg class="icon" aria-hidden="true"><use href="#i-sparkle"/></svg></span> Uma nova forma de receber</span>
+        <h1 id="hero-heading">Pagamentos simples. <span>Impacto sem limites.</span></h1>
+        <p class="hero-description">Uma experiência de pagamento pensada para facilitar cada contribuição. Reúna cobranças e doações em uma interface clara, moderna e acolhedora.</p>
+        <div class="hero-actions">
+          <a href="#checkout" class="btn btn-primary">Testar a central <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+          <a href="#como-funciona" class="btn btn-secondary">Entenda como funciona <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+        <div class="hero-promises" aria-label="Destaques da demonstração">
+          <span><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Interface responsiva</span>
+          <span><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Jornada intuitiva</span>
+        </div>
+        <div class="floating-note" aria-hidden="true"><span class="note-symbol"><svg class="icon"><use href="#i-heart"/></svg></span><span><strong>Mais possibilidades</strong><small>Pagamento e doação no mesmo lugar</small></span><svg class="icon note-arrow"><use href="#i-arrow-up-right"/></svg></div>
+      </div>
+
+      <section class="checkout-wrap" id="checkout" aria-labelledby="checkout-heading">
+        <div class="checkout-glow" aria-hidden="true"></div>
+        <div class="checkout-card">
+          <div class="checkout-topline"><span><span class="live-dot"></span> Experiência interativa</span><span class="safe-label"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg> Ambiente demo</span></div>
+          <div class="checkout-heading-row"><div><span class="field-overline">SUA CENTRAL</span><h2 id="checkout-heading">Como deseja continuar?</h2></div><span class="heading-badge" aria-hidden="true"><svg class="icon"><use href="#i-sparkle"/></svg></span></div>
+
+          <div class="mode-tabs" role="group" aria-label="Tipo de operação">
+            <button class="mode-tab is-active" type="button" data-mode="pagamento" aria-pressed="true"><svg class="icon" aria-hidden="true"><use href="#i-card"/></svg> Fazer pagamento</button>
+            <button class="mode-tab" type="button" data-mode="doacao" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg> Fazer doação</button>
+          </div>
+
+          <div class="amount-section">
+            <div class="section-label-row"><label class="section-label" for="amount-input" id="amount-label">Escolha o valor</label><span class="optional-label">BRL · R$</span></div>
+            <div class="preset-grid" id="presets" role="group" aria-label="Valores sugeridos">
+              <button class="preset" type="button" data-amount="49.90" aria-pressed="false">R$ 49,90</button>
+              <button class="preset is-selected" type="button" data-amount="89.90" aria-pressed="true">R$ 89,90</button>
+              <button class="preset" type="button" data-amount="149.90" aria-pressed="false">R$ 149,90</button>
+            </div>
+            <div class="amount-input-wrap"><span class="currency-prefix" aria-hidden="true">R$</span><input id="amount-input" name="amount" type="text" inputmode="decimal" autocomplete="off" value="89,90" aria-describedby="amount-hint amount-error" maxlength="14"><span class="amount-trailing">Valor personalizado</span></div>
+            <p class="field-help" id="amount-hint">Escolha uma sugestão ou digite outro valor.</p>
+            <p class="field-error" id="amount-error" role="alert" hidden>Insira um valor entre R$ 1,00 e R$ 100.000,00.</p>
+          </div>
+
+          <div class="frequency-section" id="frequency-section" hidden>
+            <span class="section-label" id="frequency-label">Frequência da doação</span>
+            <div class="frequency-options" role="group" aria-labelledby="frequency-label">
+              <button class="frequency-choice is-selected" type="button" data-frequency="unica" aria-pressed="true">Única</button>
+              <button class="frequency-choice" type="button" data-frequency="mensal" aria-pressed="false">Mensal <span class="choice-hint">Simulação</span></button>
+            </div>
+            <p class="field-help" id="recurring-note" hidden>Doação mensal ilustrativa. A recorrência real depende do provedor de pagamentos.</p>
+          </div>
+
+          <div class="payment-section"><div class="section-label-row"><span class="section-label" id="methods-label">Forma de pagamento</span><span class="optional-label">Escolha uma opção</span></div>
+            <div class="methods-grid" role="group" aria-labelledby="methods-label">
+              <button class="method is-selected" type="button" data-method="pix" aria-pressed="true"><span class="method-icon pix-icon"><svg class="icon" aria-hidden="true"><use href="#i-pix"/></svg></span><span>Pix</span><span class="method-check" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span></button>
+              <button class="method" type="button" data-method="boleto" aria-pressed="false"><span class="method-icon"><svg class="icon" aria-hidden="true"><use href="#i-bill"/></svg></span><span>Boleto</span><span class="method-check" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span></button>
+              <button class="method" type="button" data-method="credito" aria-pressed="false"><span class="method-icon"><svg class="icon" aria-hidden="true"><use href="#i-card"/></svg></span><span>Crédito</span><span class="method-check" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span></button>
+              <button class="method" type="button" data-method="debito" aria-pressed="false"><span class="method-icon"><svg class="icon" aria-hidden="true"><use href="#i-card"/></svg></span><span>Débito</span><span class="method-check" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span></button>
+            </div>
+          </div>
+
+          <div class="method-preview" id="method-preview" aria-live="polite">
+            <div class="method-info"><span class="preview-icon"><svg class="icon" aria-hidden="true"><use href="#i-bolt"/></svg></span><div><strong>Prático e rápido com Pix</strong><p>Na versão final, um QR Code e um código de pagamento serão gerados pelo provedor.</p></div></div>
+            <div class="pix-art" id="pix-art"><canvas id="pix-canvas" width="120" height="120" role="img" aria-label="Arte em quadrados, apenas ilustrativa. Não é um QR Code válido."></canvas><div><span class="art-tag">EXEMPLO VISUAL</span><strong>QR ilustrativo</strong><small>Não escaneável · sem cobrança</small></div></div>
+          </div>
+
+          <div class="checkout-total"><div><span id="summary-label">Total do pagamento</span><small id="summary-frequency">Cobrança demonstrativa</small></div><strong id="summary-amount">R$ 89,90</strong></div>
+          <button class="submit-button" id="submit-button" type="button">Simular pagamento com Pix <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+          <p class="checkout-disclaimer"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><span>Demonstração sem transações reais. Não informe dados bancários.</span></p>
+        </div>
+        <div class="checkout-bottom-badge"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg> Integração real feita com intermediador de pagamentos</div>
+      </section>
+    </section>
+
+    <section id="beneficios" class="benefits container" aria-labelledby="benefits-heading">
+      <div class="section-intro"><span class="eyebrow eyebrow-light">TUDO EM UM SÓ LUGAR</span><h2 id="benefits-heading">Uma experiência melhor para <em>quem paga e para quem recebe.</em></h2><p>Uma base visual pensada para se adaptar à identidade da sua organização e evoluir conforme suas necessidades.</p></div>
+      <div class="benefit-grid">
+        <article class="benefit-card"><span class="benefit-symbol mint"><svg class="icon" aria-hidden="true"><use href="#i-bolt"/></svg></span><span class="benefit-index">01 / PAGAMENTOS</span><h3>Liberdade na escolha</h3><p>Pix, boleto e cartões em uma jornada organizada, sem excesso de etapas.</p><svg class="icon card-corner" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></article>
+        <article class="benefit-card"><span class="benefit-symbol pink"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></span><span class="benefit-index">02 / DOAÇÕES</span><h3>Contribuir ficou fácil</h3><p>Valores sugeridos e personalizados, com opção de demonstrar contribuições mensais.</p><svg class="icon card-corner" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></article>
+        <article class="benefit-card"><span class="benefit-symbol lavender"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span><span class="benefit-index">03 / INTEGRAÇÃO</span><h3>Estrutura responsável</h3><p>Na produção, pagamentos e confirmações devem passar por um provedor e backend seguros.</p><svg class="icon card-corner" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></article>
+      </div>
+    </section>
+
+    <section class="how-section" id="como-funciona" aria-labelledby="how-heading"><div class="container how-layout"><div class="how-intro"><span class="eyebrow eyebrow-dark">SIMPLES DO COMEÇO AO FIM</span><h2 id="how-heading">Três passos. Uma boa experiência.</h2><p>Este protótipo demonstra a interface. A cobrança e a confirmação automáticas precisam ser conectadas ao intermediador escolhido.</p><a href="#checkout" class="text-link">Experimentar a jornada <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></div><div class="steps"><article class="step"><span>01</span><div><h3>Escolha como contribuir</h3><p>Alterne entre pagamento e doação, e defina um valor.</p></div></article><article class="step"><span>02</span><div><h3>Selecione o método</h3><p>Veja como Pix, boleto, crédito e débito aparecem no checkout.</p></div></article><article class="step"><span>03</span><div><h3>Visualize a confirmação</h3><p>Conclua a simulação para conhecer a tela de sucesso.</p></div></article></div></div></section>
+
+    <section class="faq container" id="perguntas" aria-labelledby="faq-heading"><div class="faq-lead"><span class="eyebrow eyebrow-light">PERGUNTAS FREQUENTES</span><h2 id="faq-heading">Transparência em cada detalhe.</h2><p>O que já funciona nesta demonstração e o que depende da integração definitiva.</p></div><div class="faq-list"><details><summary>Este site realiza cobranças de verdade?<svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><p>Não. Esta é uma demonstração navegável. Nenhuma transação é enviada a um banco, cartão ou plataforma de pagamentos.</p></details><details><summary>Como serão feitos os pagamentos reais?<svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><p>Após definir o provedor, o backend criará as cobranças e receberá notificações verificadas de pagamento. O checkout utilizará as ferramentas oficiais do intermediador.</p></details><details><summary>É possível personalizar a identidade visual?<svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><p>Sim. Cores, logotipo, textos, opções de contribuição e fluxos podem ser adaptados ao site e ao público da organização.</p></details><details><summary>Doações mensais e débito funcionarão?<svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><p>A implementação dessas opções depende da disponibilidade e das regras do intermediador selecionado. Aqui, ambas aparecem apenas como simulação de interface.</p></details></div></section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-inner"><a class="brand brand-footer" href="#inicio"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 4 27 15 16 26 5 15 16 4Z" fill="currentColor"/><path d="m16 10 5 5-5 5-5-5 5-5Z" fill="#202b4d"/></svg></span><span>flora<span class="brand-accent">pay</span><span class="brand-period">.</span></span></a><p>Conceito demonstrativo criado para apresentação comercial. Marca fictícia.</p><a href="#inicio">Voltar ao topo ↑</a></div></footer>
+
+  <div class="modal-backdrop" id="result-modal" hidden><div class="result-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc" tabindex="-1"><button id="modal-close" class="modal-x" type="button" aria-label="Fechar janela"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button><span class="success-icon"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="modal-kicker">FLORAPAY · DEMONSTRAÇÃO</span><h2 id="modal-title">Simulação concluída!</h2><p id="modal-desc">Você chegou ao fim do fluxo de demonstração. Nenhum pagamento foi processado.</p><div class="modal-receipt"><span>Tipo <strong id="receipt-type">Pagamento</strong></span><span>Método <strong id="receipt-method">Pix</strong></span><span>Valor <strong id="receipt-value">R$ 89,90</strong></span></div><p class="modal-note"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg> Com a integração real, o status será confirmado pelo provedor e verificado no servidor.</p><button class="btn btn-primary modal-done" id="modal-done" type="button">Voltar à demonstração <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></button></div></div>
+</body>
+</html>
